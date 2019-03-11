@@ -1,8 +1,16 @@
 const express = require('express');
 var app = express();
-app.get('/', (req, res) => {
-    res.send("Hi, Welcome To First Express Example");
+app.use('/jsonResult', (req, res) => {
+    res.send({
+        id: 123,
+        name: 'Ashok Kumar Sharma',
+        address: [{
+            Stree: 'Bangalore',
+            District: 'Bangalore',
+            State: 'Karnataka',
+            Country: 'India'
+        }]
+    });
 });
-app.use("/static", express.static(path.join(__dirname + '/public')));
-app.listen(3131);
-console.log("Listening at localhost://3131");
+app.listen(3000);
+console.log("Listening at http://localhost:3000/");

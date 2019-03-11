@@ -1,5 +1,5 @@
 var express = require('express');
 var app = express();
-app.use(express.static(__dirname + '/public'));
-app.listen(3005);
+app.use(express.static(__dirname + '/Views'));
+app.listen(3000);
 console.log('listening at localhost://3000');
