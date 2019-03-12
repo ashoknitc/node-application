@@ -1,8 +1,24 @@
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 var app = express();
 app.set('view page', 'hbs');
 app.use(express.static(__dirname + '/public'));
+app.use((req, res, next) => {
+  var now = new Date().toString();
+  var log = now + " " + req.url + " " + req.method;
+  fs.appendFile('logFile.log', log + '\n', (err) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log("Data Written Successfully");
+    }
+  });
+  next();
+});
+// app.use((req, res, next) => {
+//   res.render('maintainance.hbs');
+// });
 hbs.registerPartials(__dirname + '/views/partials');
 app.get('/about', (req, res) => {
   res.render('about.hbs');
