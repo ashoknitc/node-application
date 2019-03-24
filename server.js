@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 var app = express();
+
 app.set('view page', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use((req, res, next) => {
