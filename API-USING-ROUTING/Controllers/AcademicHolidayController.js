@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const formidable = require('express-formidable');
 var _ = require('lodash');
 var {
     ObjectId
@@ -12,10 +13,11 @@ var {
 } = require('../models/AcademicHolidayModel');
 
 var router = express.Router();
-router.use(bodyParser.json());
+//router.use(bodyParser.json());
+
 router.post('/addActivity', (req, res) => {
-    console.log(req.body);
-    var holidayDate = new HolidayInfo({
+
+    /*var holidayDate = new HolidayInfo({
 
         createdBy: req.body.createdBy,
         createTime: req.body.createTime,
@@ -29,12 +31,13 @@ router.post('/addActivity', (req, res) => {
         holidayTitle: req.body.holidayTitle,
         holidayImagePath: req.body.holidayImagePath,
         session: req.body.session
-    });
+    });*/
+    var holidayDate = new HolidayInfo(req.fields);
     holidayDate.save().then((doc) => {
-        res.send(JSON.stringify(doc, undefined, 2));
+        res.send(doc);
         res.end();
     }).catch((err) => {
-        res.send(JSON.stringify(err, undefined, 2));
+        res.send(err);
         res.end();
     })
 });
